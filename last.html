@@ -133,6 +133,65 @@
             }
         }
 
+        /* Animated rose petals behind the page content */
+        .background-petals {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .background-petal {
+            position: absolute;
+            top: -10vh;
+            left: var(--petal-left);
+            width: 14px;
+            height: 20px;
+            border-radius: 70% 30% 70% 30%;
+            background: linear-gradient(135deg, #ef476f, #a4133c);
+            opacity: 0;
+            filter: drop-shadow(0 3px 3px rgba(125, 16, 50, 0.18));
+            animation: petalFall var(--petal-duration) linear infinite;
+            animation-delay: var(--petal-delay);
+        }
+
+        .background-petal:nth-child(2n) {
+            width: 10px;
+            height: 15px;
+            background: linear-gradient(135deg, #ff758f, #c9184a);
+        }
+
+        .background-petal:nth-child(3n) {
+            width: 18px;
+            height: 12px;
+            border-radius: 50% 20% 50% 20%;
+        }
+
+        @keyframes petalFall {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, -10vh, 0) rotate(0deg);
+            }
+
+            12% {
+                opacity: 0.65;
+            }
+
+            50% {
+                transform: translate3d(var(--petal-sway), 50vh, 0) rotate(180deg);
+            }
+
+            88% {
+                opacity: 0.45;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate3d(calc(var(--petal-sway) * -1), 115vh, 0) rotate(360deg);
+            }
+        }
+
         /* Welcome Section */
         .welcome {
             text-align: center;
@@ -552,6 +611,120 @@
             50% { transform: translateY(-12px) scale(1.12); }
         }
 
+        /* Opening rose popup */
+        .rose-popup {
+            position: fixed;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            padding: 1.5rem;
+            background: rgba(92, 18, 39, 0.82);
+            backdrop-filter: blur(8px);
+            z-index: 20;
+            animation: rosePopupIn 0.7s ease both;
+        }
+
+        .rose-popup.is-closing {
+            animation: rosePopupOut 0.7s ease forwards;
+            pointer-events: none;
+        }
+
+        .rose-popup-content {
+            position: relative;
+            width: min(360px, 100%);
+            padding: 2.5rem 1.5rem 2rem;
+            text-align: center;
+            color: #fff7f8;
+            background: linear-gradient(145deg, #9e183d, #d52e52);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 24px;
+            box-shadow: 0 24px 60px rgba(45, 0, 16, 0.4);
+            overflow: hidden;
+            animation: roseBloom 0.9s cubic-bezier(0.2, 1.35, 0.4, 1) 0.15s both;
+        }
+
+        .rose-popup-content::before,
+        .rose-popup-content::after {
+            content: '✦';
+            position: absolute;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 1.4rem;
+            animation: roseSparkle 2s ease-in-out infinite;
+        }
+
+        .rose-popup-content::before {
+            top: 1.2rem;
+            left: 1.5rem;
+        }
+
+        .rose-popup-content::after {
+            right: 1.5rem;
+            bottom: 1.2rem;
+            animation-delay: 0.7s;
+        }
+
+        .rose-flower {
+            display: block;
+            font-size: 5.5rem;
+            line-height: 1;
+            filter: drop-shadow(0 8px 8px rgba(68, 0, 15, 0.3));
+            animation: roseSway 2.2s ease-in-out infinite;
+        }
+
+        .rose-popup h2 {
+            margin-top: 1rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .rose-popup p {
+            margin: 0.5rem 0 1.3rem;
+            font-size: 1rem;
+        }
+
+        .rose-close {
+            padding: 0.7rem 1.4rem;
+            color: #9e183d;
+            background: #fff;
+            border: 0;
+            border-radius: 999px;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 700;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .rose-close:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(70, 0, 18, 0.25);
+        }
+
+        @keyframes rosePopupIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes rosePopupOut {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        @keyframes roseBloom {
+            from { opacity: 0; transform: scale(0.65) translateY(24px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes roseSway {
+            0%, 100% { transform: rotate(-4deg) translateY(0); }
+            50% { transform: rotate(4deg) translateY(-8px); }
+        }
+
+        @keyframes roseSparkle {
+            0%, 100% { opacity: 0.35; transform: scale(0.7) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.2) rotate(20deg); }
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .welcome h1 {
@@ -586,6 +759,16 @@
 
 <body>
     <div class="magic-sparkles"></div>
+    <div class="background-petals" aria-hidden="true">
+        <span class="background-petal" style="--petal-left: 7%; --petal-duration: 11s; --petal-delay: -2s; --petal-sway: 70px;"></span>
+        <span class="background-petal" style="--petal-left: 18%; --petal-duration: 14s; --petal-delay: -8s; --petal-sway: -55px;"></span>
+        <span class="background-petal" style="--petal-left: 31%; --petal-duration: 12s; --petal-delay: -5s; --petal-sway: 90px;"></span>
+        <span class="background-petal" style="--petal-left: 45%; --petal-duration: 15s; --petal-delay: -11s; --petal-sway: -75px;"></span>
+        <span class="background-petal" style="--petal-left: 58%; --petal-duration: 10s; --petal-delay: -4s; --petal-sway: 60px;"></span>
+        <span class="background-petal" style="--petal-left: 71%; --petal-duration: 13s; --petal-delay: -9s; --petal-sway: -90px;"></span>
+        <span class="background-petal" style="--petal-left: 84%; --petal-duration: 11s; --petal-delay: -6s; --petal-sway: 50px;"></span>
+        <span class="background-petal" style="--petal-left: 94%; --petal-duration: 16s; --petal-delay: -13s; --petal-sway: -65px;"></span>
+    </div>
     <div class="floating-hearts">
         <!-- Hearts will be generated via CSS -->
         <div class="heart" style="--float-duration: 6s; --delay: 0s; --translate-x: 20px;">💝</div>
@@ -595,15 +778,23 @@
         <div class="heart" style="--float-duration: 5s; --delay: 4s; --translate-x: 30px;">💕</div>
     </div>
 
+    <div class="rose-popup" id="rosePopup" role="dialog" aria-modal="true" aria-label="A red rose for you">
+        <div class="rose-popup-content">
+            <span class="rose-flower" aria-hidden="true">🌹</span>
+            <h2>A Rose For You</h2>
+            <p>Semoga hari ini seindah bunga mawar ini.</p>
+            <button class="rose-close" id="roseClose" type="button">Continue</button>
+        </div>
+    </div>
+
     <section class="welcome">
         <h1>Our Beautiful Moments Together</h1>
-        <p>Every moment spent with you has been magical. Let's cherish these precious memories ...</p>
     </section>
 
     <div class="memory-container">
         <div class="memory-card">
             <img src="./her smile.jpeg" alt="First Date" class="memory-img">
-            <div class="memory-date">Her Smile Says It All</div>
+            <div class="memory-date">your Smile Says It All</div>
             <div class="memory-caption">You’re truly one of the sweetest girls I know, and I feel lucky to have a crush
                 like you.❤️</div>
         </div>
@@ -661,6 +852,12 @@
         Browser kamu tidak mendukung audio HTML5.
     </audio>
 
+    <section class="quote-section" style="padding: 20px; text-align: center; font-size: 1.2rem; color: #4a4a4a;">
+        <p>
+            "when i see your face, there's not a thing that i would change,  'cause you're amazing..... <br></br> just the way you are"
+        </p>
+    </section>
+
     <section class="final-message">
         <h2>Thank You for the Memories</h2>
         <p>Every laugh, every chat, and every moment we’ve shared has been truly special.💫<br>
@@ -689,6 +886,19 @@
         const totalTimeEl = document.getElementById('totalTime');
         const goodbyeBtn = document.querySelector('.goodbye-btn');
         const goodbyeOverlay = document.getElementById('goodbyeOverlay');
+        const rosePopup = document.getElementById('rosePopup');
+        const roseClose = document.getElementById('roseClose');
+
+        function closeRosePopup() {
+            rosePopup.classList.add('is-closing');
+            window.setTimeout(() => rosePopup.remove(), 700);
+        }
+
+        roseClose.addEventListener('click', closeRosePopup);
+        rosePopup.addEventListener('click', (event) => {
+            if (event.target === rosePopup) closeRosePopup();
+        });
+        window.setTimeout(closeRosePopup, 4500);
 
         function formatTime(seconds) {
             if (!seconds || Number.isNaN(seconds)) return '0:00';

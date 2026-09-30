@@ -1,7 +1,7 @@
  // Reasons database
  const reasons = [
     { 
-        text: "tau gasih? ada kebaikan yang ga akan ada kalau kamu ga hadir. mungkin kalimat itulah yang bisa menggambarkan bagaimana kamu hadir di hidupku💖<br></br>jiakhh", 
+        text: "tau gasih? ada kebaikan yang ga akan ada kalau kamu ga hadir. mungkin kalimat itulah yang bisa menggambarkan bagaimana kamu hadir di hidupku💖<br></br>jiakhh~~~~ <br></br>(beneran btw)", 
         emoji: "🌟",
         gif: "gif1.gif"
     },
@@ -11,12 +11,12 @@
         gif: "gif2.gif"
     },
     { 
-        text: "di ulang tahunmu yang ke 16 ini, aku doakan kamu bisa mendapatkan segala hal yang baik untukmu dan masa depanmu. ✨ ", 
+        text: "di ulang tahunmu yang ke 16 ini, aku doakan kedepannya kamu bisa mendapatkan segala hal yang baik untukmu dan masa depanmu. ✨ ", 
         emoji: "💕",
         gif: "gif1.gif"
     },
     { 
-        text: "tetaplah menjadi wanita yang baik di perjalanan yang panjang ini ya🥳 ", 
+        text: "jangan lupa jaga kesehatanmu juga ya🥳 ", 
         emoji: "🌟",
         gif: "gif2.gif"
     }

@@ -1,7 +1,7 @@
  // Reasons database
  const reasons = [
     { 
-        text: "ada kebaikan yang ga akan ada kalau kamu ga hadir. mungkin kalimat itulah yang bisa menggambarkan bagaimana kamu hadir di hidupku💖", 
+        text: "tau gasih? ada kebaikan yang ga akan ada kalau kamu ga hadir. mungkin kalimat itulah yang bisa menggambarkan bagaimana kamu hadir di hidupku💖<br></br>jiakhh", 
         emoji: "🌟",
         gif: "gif1.gif"
     },
